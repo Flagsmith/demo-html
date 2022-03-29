@@ -16,7 +16,9 @@
                     console.log("checkout-v2=" + flagsmith.hasFeature('checkout-v2'));
 
                     if (flagsmith.hasFeature('checkout-v2')) {
-                        document.getElementById("checkout-button").href = "/checkout/v2.html";
+                        document.getElementById("checkout-button").href = "checkout/v2.html";
+                    } else {
+                        document.getElementById("checkout-button").href = "checkout/v1.html";
                     }
                 },
             });
