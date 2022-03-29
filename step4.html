@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/flagsmith/index.js"></script>
+    <meta charset="utf-8" />
+    <title>Flagsmith Store</title>
+</head>
+
+<body>
+    <h1>Welcome to the Flagsmith Store</h1>
+
+    <p>
+        Username: <input type="text" name="username" id="username" />
+        <input type="submit" name="login" id="login-button" value="Log In">
+    <div id="logged-in"></div>
+    </p>
+
+    <a href="/checkout/v1.html" id="checkout-button" class="button">Check Out</a>
+</body>
+
+<script>
+    function getFlags() {
+        flagsmith.init({
+            environmentID: 'NowEDzKzNJXZVTVanLVdMQ',
+            onChange: (oldFlags, params) => {
+                console.log("Grabbing Flags");
+                console.log("checkout-v2=" + flagsmith.hasFeature('checkout-v2'));
+
+                if (flagsmith.hasFeature('checkout-v2')) {
+                    document.getElementById("checkout-button").href = "checkout/v2.html";
+                } else {
+                    document.getElementById("checkout-button").href = "checkout/v1.html";
+                }
+            },
+        });
+    }
+
+    function login() {
+        username = document.getElementById('username').value;
+
+        loggedInDev = document.getElementById("logged-in");
+        loggedInDev.innerHTML = 'Logged in as: <b>' + username + '</b>';
+
+        flagsmith.identify(document.getElementById('username').value);
+        flagsmith.setTrait("age", 46);
+        console.log("Logged in");
+    }
+
+    document.getElementById("login-button").addEventListener("click", login);
+
+    getFlags();
+</script>
+
+</html>
