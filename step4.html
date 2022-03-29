@@ -13,6 +13,7 @@
 
     <p>
         Username: <input type="text" name="username" id="username" />
+        Age: <input type="text" name="age" id="age" maxlength="3"/>
         <input type="submit" name="login" id="login-button" value="Log In">
     <div id="logged-in"></div>
     </p>
@@ -44,7 +45,7 @@
         loggedInDev.innerHTML = 'Logged in as: <b>' + username + '</b>';
 
         flagsmith.identify(document.getElementById('username').value);
-        flagsmith.setTrait("age", 46);
+        flagsmith.setTrait("age", parseInt(document.getElementById('age').value));
         console.log("Logged in");
     }
 
